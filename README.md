@@ -1,65 +1,6 @@
 # Manipulative Expression Recognition (MER) and LLM Manipulativeness Benchmark
 
 
-## Introduction
-
-In the rapidly evolving world of artificial intelligence, the rise of large language models like OpenAI's GPT series has brought about profound shifts in digital communication. These models, capable of generating human-like text, have widespread applications ranging from content creation to customer service. As of 2023, their influence is undeniable and pervasive, extending even into areas such as personalised education and virtual companionship.
-
-However, with great capability comes an inherent need for responsibility and scrutiny. Ensuring alignment with human values and understanding the underlying communicative tendencies of these models is paramount. Specifically, evaluating and benchmarking their potential for manipulative expressions becomes a crucial task.
-
-At the same time, in the human realm of communication, manipulative behaviours can significantly impact interpersonal relationships, business negotiations, politics, and many other areas of life. These behaviours often go unnoticed or unrecognised, leaving victims of manipulation without the support and tools needed to defend themselves.
-
-It is against this backdrop that this new software, "Manipulative Expression Recognition (MER) and LLM Manipulativeness Benchmark" comes into the picture. In contrast to various existing fact-checking software the current software focuses on the psychological communication style detection and labelling.
-
-
-## Functionality
-
-MER is designed to provide a comprehensive solution to the challenges mentioned above. It is a software library that allows users to upload transcripts of conversations or individual messages. The software then analyses the text, applying labels that indicate potential manipulative communication styles.
-
-This tool offers two main use cases:
-
-1. Large Language Model Evaluation: As more sophisticated models continue to emerge, the need for tools to measure their alignment with human values grows concurrently. MER enables developers and researchers to evaluate and benchmark language model outputs for potential manipulative expressions. This can help inform adjustments and improvements to these models, promoting transparency, safety, and ethical considerations in AI development.
-
-2. Human Communication Analysis: The application of MER extends beyond AI. By analysing human-to-human conversations, MER can help identify manipulative behaviours and patterns. This capability can provide critical support to individuals who may be victims of manipulation, raising awareness and facilitating the development of counter-strategies.
-
-In the future, the plan is to expand MER’s reach by offering it as a Software as a Service (SaaS) solution. Users will be able to access its functionalities via a web-based JSON API and a user-friendly graphical interface.
-
-The vision for MER is to foster a culture of communication that is more transparent, equitable, and free from manipulation. We believe that by illuminating the nuances of language, we can contribute to a better understanding between AI and humans, as well as among humans themselves.
-
-
-## Use cases
-
-* Benchmarking of new LLM models:
-    * Benchmarking LLM resistance to manipulation from users. Even if the user input is manipulative, the LLM output should not be manipulative.
-    * Benchmarking LLM outputs for presence of manipulation in case of benign user inputs.
-* Supporting humans both in their communication with other humans as well as with LLM-s.
-* Evaluation of news articles and blog posts.
-* For software providers: Automatic detection of some types of prompt injections from end users.
-
-
-## How it works
-
-* This software is able to detect a detailed list of manipulative communication styles.
-* The locations where a particular manipulative style is detected are highlighted / annotated with location markers.
-* Same location may also get annotated with multiple markers if appropriate.
-* The software provides three main outputs:
-    * Annotation of the input conversation with labels. This is for mixed qualitative/quantitative analysis purposes.
-    * Summary metrics for quantitative benchmark purposes. Summary metrics contains the total counts of occurrence of each manipulation style per conversation participant.
-    * For purely qualitative analysis, a general descriptive summary text of the involved conversation participants.
-* Internally, the software uses two prompts: 
-    * One prompt is closed-ended, where the current software or end user provides a concrete list of manipulation styles. The software asks the LLM to label the conversation using the labels in this list. The objective of the closed-ended prompt is to remind LLM of many styles it might otherwise forget to detect.
-    * The other prompt is open-ended, where LLM can describe the communication styles present in input conversation in an unrestricted way and without hints from the software or user. The purpose of open-ended prompt is to extend the labels list that goes into the closed-ended prompt. The default labels list incorporated in this software has grown over time by inspecting the open-ended qualitative evaluations from ChatGPT and then adding keywords from these open-ended evaluations to the list.
-* Some of the entries in the default labels list have partially or even entirely overlapping meanings. The reason for using overlapping entries is that LLM sometimes prefers to use different labels for similar or same things. Also LLM may occasionally output slightly different labels than is present in the instruction. Fortunately this has happened relatively rarely so far. Handling of this aspect will be tuned further in the future releases of the current software. Currently unknown labels provided by LLM end up in the output field `unexpected_labels`.
-* This software is different from lie detection / fact checking software. It only focuses on communication style without reliance on external knowledge bases (except for the use of a language model).
-
-
-## Additional features
-
-* The software applies input text anonymisation. Person names, organisation names, place names, etc are replaced with abstract names like Person A, Person B, etc. Also some numeric amounts are replaced. This has two purposes:
-    * Anonymised input may make the LLM evaluations more fair.
-    * Anonymised input significantly reduces the risk of private or sensitive data leakage.
-
-
 ## Example output
 
 Sample JSON output can be found here: <a href="https://github.com/levitation-opensource/Manipulative-Expression-Recognition/blob/main/data/test_evaluation.json"><u>data/test_evaluation.json</u></a>
@@ -201,14 +142,6 @@ The software produces output in four formats:
 * Add support for open-source models available at HuggingFace.
 
 
-### Software tuning:
-* Improving error handling.
-* Invalid LLM output detection. Sometimes LLM produces results in a different format than expected.
-
-### New related apps:
-* Building and setting up a web based API endpoint.
-* Building and setting up a web based user interface for non-programmer end users.
-* Publishing a Slack plugin.
 
 ### Experiments:
 * Test manipulation detection against various known prompt injection prompts.
@@ -218,9 +151,6 @@ The software produces output in four formats:
     * Measure presence of manipulation in LLM outputs in case of benign user inputs.
 * Look for conversations on the theme of Waluigi Effect (https://www.lesswrong.com/posts/D7PumeYTDPfBTp3i7/the-waluigi-effect-mega-post).
 
-
-## Current project state
-Ready to use. Is actively developed further.
 
 
 ## Acknowledgements

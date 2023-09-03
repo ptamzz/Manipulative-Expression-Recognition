@@ -8,6 +8,12 @@ python -m spacy download en_core_web_lg
 python -m spacy download en_core_web_trf
 
 
+python3 -m spacy download en_core_web_sm
+python3 -m spacy download en_core_web_md
+python3 -m spacy download en_core_web_lg
+python3 -m spacy download en_core_web_trf
+
+
 
 For PDF rendering support:
 

@@ -39,6 +39,10 @@ import tenacity   # for exponential backoff
 import openai_async
 import tiktoken
 
+##For looping with 6 ms delay to maintain OpenAI API limit
+#import asyncio
+#from tenacity import retry, stop_after_delay, wait_fixed
+
 
 # organization = os.getenv("OPENAI_API_ORG")
 api_key = os.getenv("OPENAI_API_KEY")
@@ -1314,5 +1318,15 @@ async def recogniser(do_open_ended_analysis = None, do_closed_ended_analysis = N
 
 if __name__ == '__main__':
   loop.run_until_complete(recogniser(extract_message_indexes = None))   # extract_message_indexes = None - use config file
+
+
+## Retry decorator with a delay of 6 milliseconds (0.006 seconds)
+#@retry(stop=stop_after_delay(0.006), wait=wait_fixed(0.006))
+#async def retry_recogniser():
+    #return await recogniser(extract_message_indexes=None)
+
+#if __name__ == '__main__':
+    ## Call the retry_recogniser function with a retry mechanism and delay
+    #asyncio.run(retry_recogniser())
 
 
